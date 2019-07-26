@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>新增用户</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous">
+</head>
+<body>
+<div class="container-fluid">
+    <div class="alert alert-info" role="alert">
+        <h3>新增用户</h3>
+    </div>
+        <form>
+            <div class="form-group row">
+                <label for="input1" class="col-sm-2 col-form-label">用户编号</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="input1" placeholder="用户编号">
+                    <span style="color: red;">*为必填项</span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="input2" class="col-sm-2 col-form-label">用户姓名</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="input2" placeholder="用户姓名">
+                    <span style="color: red;">*为必填项</span>
+                </div>
+            </div>
+
+            <fieldset class="form-group">
+                <div class="row">
+                    <legend class="col-form-label col-sm-2 pt-0">用户性别</legend>
+                    <div class="col-sm-10">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
+                            <label class="form-check-label" for="gridRadios1">
+                                男
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
+                            <label class="form-check-label" for="gridRadios2">
+                                女
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+
+            <div class="form-group row">
+                <label for="input3" class="col-sm-2 col-form-label">所属部门</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="input3" placeholder="所属部门">
+                    <span style="color: red;">*为必填项</span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="input4" class="col-sm-2 col-form-label">所处职位</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="input4" placeholder="所处职位">
+                    <span style="color: red;">*为必填项</span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="input5" class="col-sm-2 col-form-label">联系电话</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="input5" placeholder="联系电话">
+                    <span style="color: red;">*为必填项</span>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-sm-10">
+                    <button type="button" class="btn btn-primary" onclick="addEmp()">保存</button>&nbsp;&nbsp;&nbsp;
+                    <button type="button" class="btn btn-primary">
+                        <a href="index.html" style="text-decoration: none;color: aliceblue">返回</a>
+                    </button>
+                </div>
+            </div>
+        </form>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<script>
+    function addEmp(){
+        var id = $("#input1").val();
+        var name = $("#input2").val();
+        var sex = document.getElementsByName("gridRadios").value;
+        var depart = $("#input3").val();
+        var post = $("#input4").val();
+        var tel = $("#input5").val();
+    $.get("/myweb/employee/addEmployee.do",
+        {"emp_id" : id,
+            "emp_name" : name,
+            "emp_sex" : sex,
+            "depart_id" : depart,
+            "post_id" : post,
+            "emp_tel" : tel},
+        function (data) {
+            alert("添加成功");
+        },"json");
+
+    }
+
+
+</script>
+
+</body>
+</html>

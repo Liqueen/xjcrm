@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.creat.xjcrm.dao.CustomerMapper">
+    <insert id="addCusInfo" parameterType="com.creat.xjcrm.bean.Customer">
+        insert into customer (cus_name,cus_tel)
+        values (#{cus_name},#{cus_tel})
+    </insert>
+
+
+    <resultMap id="cusMap" type="com.creat.xjcrm.bean.Customer">
+        <id property="cus_id" column="cus_id"></id>
+        <result property="cus_name" column="cus_name"></result>
+        <result property="cus_tel" column="cus_tel"></result>
+    </resultMap>
+
+    <select id="getAllCus" resultMap="cusMap" resultType="list">
+        select * from customer
+    </select>
+</mapper>

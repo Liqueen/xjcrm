@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>部门管理</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous">
+</head>
+<body>
+
+<div class="container-fluid">
+    <h6>部门列表</h6>
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+        + 新增部门
+    </button>
+
+    <!-- 增加部门弹出框 -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">部门增加</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                            <div class="form-group row">
+                                <label for="input2" class="col-sm-2 col-form-label">部门名称</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="input2" placeholder="部门名称">
+                                    <span style="color: red;">*为必填项</span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="input3" class="col-sm-2 col-form-label">职责范围</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="input3" placeholder="职责范围">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="input4" class="col-sm-2 col-form-label">备注</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="input4" placeholder="备注">
+                                </div>
+                            </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="addDepart()">保存</button>
+                        <button type="button" class="btn btn-primary"><a href="index.html" style="text-decoration: none;color: aliceblue">返回</a></button>
+                    </div>
+                </div>
+                </form>
+        </div>
+        </div>
+    </div>
+    <!--<button type="button" class="btn btn-outline-info">
+        <a href="addDepart.html" style="text-decoration:none;font-size: 14px">+新增部门</a>
+    </button>-->
+    <button type="button" class="btn btn-outline-info">
+        <a href="addPost.html" style="text-decoration:none;font-size: 14px">+新增职位</a>
+    </button>
+    <hr>
+    <div id="daptApp">
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">部门编号</th>
+                <th scope="col">部门名称</th>
+                <th scope="col">职责范围</th>
+                <th scope="col">备注</th>
+                <th scope="col">管理</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr v-for="dept in daptary">
+                <th scope="row">{{dept.depart_id}}</th>
+                <td>{{dept.depart_name}}</td>
+                <td>{{dept.respon}}</td>
+                <td>{{dept.remark}}</td>
+                <td>
+                    <button type="button" class="btn btn-light">
+                        <a href="limitManeger.html">权限管理</a>
+                    </button>
+                    <button type="button" class="btn btn-light">修改</button>
+                    <button type="button" class="btn btn-light">
+                        删除
+                    </button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+
+    //查询所有用户
+   var deptVue = new Vue({
+        el : "#daptApp",
+        data : {
+            daptary : []
+        },
+        created : function () {
+            var _self = this;
+            alert(1)
+            $.post("/myweb/depart/querydepart.do",function (data) {
+                _self.daptary = data;
+            },"json");
+        }
+    });
+
+    function addDepart(){
+        // var departId = $("#input1").val();
+        var departName = $("#input2").val();
+        var respon = $("#input3").val();
+        var remark = $("#input4").val();
+        $.get("/myweb/depart/adddepart.do",
+            {//传过去的参数值必须与数据库的列名一致
+                // "depart_id" : departId,
+                "depart_name" : departName,
+                "respon" : respon,
+                "remark" : remark},
+            function(data){
+                alert(11);
+            }
+        )
+    }
+
+
+</script>
+
+</body>
+</html>

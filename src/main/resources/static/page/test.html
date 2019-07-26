@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+    var ary = [1,2,3,4,5];
+
+    var r = ary.map(function(val) {     // 1, 4, 9, 16, 25
+        return val*val;
+    }).reduce(function(x,y){
+        return x+y;
+    });
+    // console.log(r);
+    alert(r);
+</script>
+
+</body>
+</html>

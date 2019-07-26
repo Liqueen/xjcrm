@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>湘教CRM管理系统</title>
+
+    <!-- Styles -->
+    <link href="../assets/css/lib/font-awesome.min.css" rel="stylesheet">
+    <link href="../assets/css/lib/themify-icons.css" rel="stylesheet">
+    <link href="../assets/css/lib/jsgrid/jsgrid-theme.min.css" rel="stylesheet" />
+    <link href="../assets/css/lib/jsgrid/jsgrid.min.css" type="text/css" rel="stylesheet" />
+    <link href="../assets/css/lib/menubar/sidebar.css" rel="stylesheet">
+    <link href="../assets/css/lib/bootstrap.min.css" rel="stylesheet">
+    <link href="../assets/css/lib/helper.css" rel="stylesheet">
+    <link href="../assets/css/style.css" rel="stylesheet">
+</head>
+
+<body>
+        <div class="sidebar sidebar-hide-to-small sidebar-shrink sidebar-gestures">
+            <div class="nano">
+                <div class="nano-content">
+                    <div class="logo"><a href="index.html"><span>湘教CRM</span></a></div>
+                    <ul>
+                        <li class="label">设置中心</li>
+                        <li><a class="sidebar-sub-toggle"><i class="ti-bar-chart-alt"></i>  系统设置  <span class="sidebar-collapse-icon ti-angle-down"></span></a>
+                            <ul>
+                                <li><a href="javascript:void(0)" onclick="departManeger()">部门管理</a></li>
+                                <li><a href="javascript:void(0)" onclick="empManeger()">员工管理</a></li>
+                                <li><a href="javascript:void(0)" onclick="addMessage()">发布公告</a></li>
+                                <li><a href="javascript:void(0)" onclick="departuser()">部门和用户设置</a></li>
+                                <li><a href="javascript:void(0)" onclick="rolelimit()">角色和权限设置</a></li>
+                                <li><a href="projectManeger.html">项目和产品设置</a></li>
+                            </ul>
+                        </li>
+                        <li><a class="sidebar-sub-toggle"><i class="ti-layout"></i> 客户管理 <span class="sidebar-collapse-icon ti-angle-down"></span></a>
+                            <ul>
+                                <li><a href="javascript:void(0)" onclick="cus(1)">客户列表</a></li>
+                                <li><a href="javascript:void(0)" onclick="cus(2)">批量导入客户信息</a></li>
+                            </ul>
+                        </li>
+                        <li><a class="sidebar-sub-toggle"><i class="ti-layout"></i> 业务设置 <span class="sidebar-collapse-icon ti-angle-down"></span></a>
+                            <ul>
+                                <li><a href="javascript:void(0)" onclick="pro(1)">业绩目标</a></li>
+                                <li><a href="javascript:void(0)" onclick="pro(2)">客户公海</a></li>
+                                <li><a href="javascript:void(0)" onclick="pro(3)">工作报告</a></li>
+                                <li><a href="javascript:void(0)" onclick="pro(4)">数据上报</a></li>
+                                <li><a href="javascript:void(0)" onclick="pro(5)">短息设置</a></li>
+                            </ul>
+                        </li>
+                        <li><a class="sidebar-sub-toggle"><i class="ti-panel"></i> 自定义设置 <span class="sidebar-collapse-icon ti-angle-down"></span></a>
+                            <ul>
+                                <li><a href="uc-calendar.html">自定义业务</a></li>
+                                <li><a href="uc-carousel.html">自定义业务字段</a></li>
+                                <li><a href="uc-weather.html">自定义业务参数</a></li>
+                                <li><a href="uc-datamap.html">自定义审批</a></li>
+                            </ul>
+                        </li>
+
+                        <li><a><i class="ti-close"></i> 更多设置</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- /# sidebar -->
+
+
+    <div class="header">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="float-left">
+                        <div class="hamburger sidebar-toggle">
+                            <span class="line"></span>
+                            <span class="line"></span>
+                            <span class="line"></span>
+                        </div>
+                    </div>
+                    <div class="float-right">
+                        <div class="dropdown dib">
+                            <div class="header-icon" data-toggle="dropdown">
+                                <a href="javascript:void(0)" onclick="getAllMsg()">
+                                    <i class="ti-bell"></i>
+                                    <span class="label label-warning" id="messageNumber">1</span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="dropdown dib">
+                            <div class="header-icon" data-toggle="dropdown">
+                                <i class="ti-email"></i>
+                            </div>
+                        </div>
+                        <div class="dropdown dib">
+                            <span class="hidden-xs" id="starter_username"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="content-wrap" style="height: auto;">
+        <div class="main">
+            <div class="container-fluid">
+                <div id="main-content">
+                    <div class="card">
+                        <!--内容区域-->
+
+
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="footer">
+                                <p>2018 © Admin Board.</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+
+    //显示当前登录的用户名以及所属角色
+    var ename = sessionStorage.getItem("empName");
+    var roleName = sessionStorage.getItem("roleName");
+    // console.log(ename+","+roleName);
+    $("#starter_username").text(ename+"("+roleName+")");
+
+    
+    setInterval(function () {
+        //显示最新消息的条数
+        $.post("/myweb/employee/getAllMsg.do",function (data) {
+            $("#messageNumber").text(data.length);
+        },"json");
+
+    },10000);
+    
+    
+    function getAllMsg() {
+        $("#main-content .card").load("msgSys.html");
+    }
+
+//系统设置
+    function departManeger(){
+        $("#main-content .card").load("departManeger.html");
+    }
+    function empManeger(){
+        $("#main-content .card").load("empManeger.html");
+    }
+    function addMessage(){
+        $("#main-content .card").load("addMessage.html");
+    }
+    function departuser(){
+        $("#main-content .card").load("departUser.html");
+    }
+    function rolelimit(){
+        $("#main-content .card").load("roleLimit.html");
+    }
+
+//客户管理
+    function cus(i) {
+         //查询客户信息i
+        if (i==1) {
+            $("#main-content .card").load("customerManeger.html");
+        }
+    }
+
+//业务设置
+    function pro(i) {
+        if(i == 1){
+            $("#main-content .card").load("performance.html");
+        }
+        else if(i == 2){
+            $("#main-content .card").load("cusHighSeas.html");
+        }
+    }
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+        <!-- jquery vendor -->
+    <script src="../assets/js/lib/jquery.min.js"></script>
+    <script src="../assets/js/lib/jquery.nanoscroller.min.js"></script>
+    <!-- nano scroller -->
+    <script src="../assets/js/lib/menubar/sidebar.js"></script>
+    <script src="../assets/js/lib/preloader/pace.min.js"></script>
+    <!-- sidebar -->
+    
+    <!-- bootstrap -->
+
+
+
+    <!-- JS Grid Scripts Start-->
+    <script src="../assets/js/lib/jsgrid/db.js"></script>
+    <script src="../assets/js/lib/jsgrid/jsgrid.core.js"></script>
+    <script src="../assets/js/lib/jsgrid/jsgrid.load-indicator.js"></script>
+    <script src="../assets/js/lib/jsgrid/jsgrid.load-strategies.js"></script>
+    <script src="../assets/js/lib/jsgrid/jsgrid.sort-strategies.js"></script>
+    <script src="../assets/js/lib/jsgrid/jsgrid.field.js"></script>
+    <script src="../assets/js/lib/jsgrid/fields/jsgrid.field.text.js"></script>
+    <script src="../assets/js/lib/jsgrid/fields/jsgrid.field.number.js"></script>
+    <script src="../assets/js/lib/jsgrid/fields/jsgrid.field.select.js"></script>
+    <script src="../assets/js/lib/jsgrid/fields/jsgrid.field.checkbox.js"></script>
+    <script src="../assets/js/lib/jsgrid/fields/jsgrid.field.control.js"></script>
+    <script src="../assets/js/lib/jsgrid/jsgrid-init.js"></script>
+    <!-- JS Grid Scripts End-->
+
+    <script src="../assets/js/lib/bootstrap.min.js"></script><script src="../assets/js/scripts.js"></script>
+    <!-- scripit init-->
+
+
+</body>
+
+</html>

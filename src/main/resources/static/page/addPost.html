@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>新增职位</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous">
+</head>
+<body>
+
+<div class="container-fluid">
+    <div class="alert alert-info" role="alert">
+        <h3>新增职位</h3>
+    </div>
+        <form>
+            <div class="form-group row">
+                <label for="input1" class="col-sm-2 col-form-label">部门编号</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="input1" placeholder="部门编号">
+                    <span style="color: red;">*为必填项</span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="input2" class="col-sm-2 col-form-label">部门名称</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="input2" placeholder="部门名称">
+                    <span style="color: red;">*为必填项</span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="input3" class="col-sm-2 col-form-label">职位编号</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="input3" placeholder="职位编号">
+                    <span style="color: red;">*为必填项</span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="input4" class="col-sm-2 col-form-label">职位名称</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="input4" placeholder="职位名称">
+                    <span style="color: red;">*为必填项</span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="input5" class="col-sm-2 col-form-label">责任范围</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="input5" placeholder="责任范围">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-sm-10">
+                    <button type="button" class="btn btn-primary" onclick="addPost()">保存</button>&nbsp;&nbsp;&nbsp;
+                    <button type="button" class="btn btn-primary">
+                        <a href="index.html" style="text-decoration: none;color: aliceblue">返回</a>
+                    </button>
+                </div>
+            </div>
+        </form>
+</div>
+
+<script>
+
+    function addPost(){
+
+    }
+
+</script>
+
+</body>
+</html>

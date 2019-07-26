@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登录界面</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous">
+
+</head>
+<body>
+<div class="container" style="width: 65%;">
+    <!-- Content here -->
+    <h1>欢迎进入登录界面</h1>
+    <form>
+        <div class="form-group">
+            <label for="account">账号 :</label>
+            <input type="text" class="form-control" id="account" aria-describedby="emailHelp" placeholder="请输入系统账号">
+            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+        </div>
+        <div class="form-group">
+            <label for="tel">手机号 :</label>
+            <input type="password" class="form-control" id="tel" placeholder="请输入6位以上的密码">
+        </div>
+        <div class="form-group">
+            <select id="roleType">
+
+            </select>
+        </div>
+        <div class="form-group form-check">
+            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+            <label class="form-check-label" for="exampleCheck1">记住我呀</label>
+        </div>
+        <div id="message" style="color: red"></div>
+        <br>
+        <div class="col-sm-offset-2 col-sm-6">
+            <a  href="javascript:login()" class="btn btn-primary btn-block">登录</a>
+        </div>
+    </form>
+
+
+</div>
+
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<script>
+    $(function() {
+        $.get("/myweb/user/getRole.do",
+            function(data){
+                // console.log(data)
+                var str = "";
+                for (var i = 0; i <data.length ; i++) {
+                    str += "<option value='"+data[i].role_id+"'>" +data[i].role_name+ "</option>";
+                }
+                $("#roleType").html(str);
+            }, "json");
+    });
+    //用户登录
+    function login(){
+        var uname = $("#account").val();
+        var tel = $("#tel").val();
+        $.post("/myweb/employee/login",{
+            "emp_name" : uname,
+            "emp_tel" : tel
+        },function (data) {
+            // alert(data);
+            if (data == ""){
+                $("#message").text("登录失败,用户名或密码错误");
+            }else{
+                //将数据存储到sessionStorage中
+                var emp = JSON.parse(data);
+                sessionStorage.setItem("empName",emp.emp_name);
+                sessionStorage.setItem("roleId",emp.role_id);
+                sessionStorage.setItem("roleName",emp.role.role_name);
+                location.href="index.html";
+            }
+
+        },"text");
+
+
+    };
+</script>
+</body>
+</html>

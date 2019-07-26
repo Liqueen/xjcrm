@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>公告管理</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous">
+</head>
+<body>
+
+<div class="container-fluid">
+    <h6>公告列表</h6>
+    <hr>
+    <div id="msgApp">
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">公告编号</th>
+                <th scope="col">公告主题</th>
+                <th scope="col">公告内容</th>
+                <th scope="col">发布时间</th>
+                <th scope="col">状态</th>
+                <th scope="col">类型</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr v-for="msg in msgary">
+                <th scope="row">{{msg.id}}</th>
+                <td>{{msg.title}}</td>
+                <td>{{msg.content}}</td>
+                <td>{{msg.create_time}}</td>
+                <td>{{msg.state}}</td>
+                <td>{{msg.type}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+
+    //查询所有用户
+   var msgVue = new Vue({
+        el : "#msgApp",
+        data : {
+            msgary : []
+        },
+        created : function () {
+            var _self = this;
+            alert(1);
+            $.post("/myweb/employee/getAllMsg.do",function (data) {
+                _self.msgary = data;
+            },"json");
+
+        }
+    });
+
+
+
+
+</script>
+
+</body>
+</html>

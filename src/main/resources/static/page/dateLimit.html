@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>数据权限</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous">
+</head>
+<body>
+
+<table class="table">
+    <thead class="thead-light">
+    <tr>
+        <th colspan="2" scope="col">数据权限(设置该权限的用户可以操作的数据范围)</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <th scope="row">
+            <div class="form-check">
+                <input class="form-check-input position-static" type="radio" name="blankRadio" id="blankRadio1" value="option1" aria-label="...">个人
+            </div>
+        </th>
+        <td>只能操作自己和下属的数据</td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <div class="form-check">
+                <input class="form-check-input position-static" type="radio" name="blankRadio" id="blankRadio2" value="option1" aria-label="...">所属部门
+            </div>
+        </th>
+        <td>能操作自己、下属、和自己所属部门的数据</td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <div class="form-check">
+                <input class="form-check-input position-static" type="radio" name="blankRadio" id="blankRadio3" value="option1" aria-label="...">所属部门及下属部门
+            </div>
+        </th>
+        <td>能操作自己、下属和自己所属部门及其子部门的数据</td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <div class="form-check">
+                <input class="form-check-input position-static" type="radio" name="blankRadio" id="blankRadio4" value="option1" aria-label="...">全公司
+            </div>
+        </th>
+        <td>能操作全公司的数据</td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

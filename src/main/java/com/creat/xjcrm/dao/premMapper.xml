@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.creat.xjcrm.dao.premMapper">
+  <resultMap id="BaseResultMap" type="com.creat.xjcrm.bean.Prem">
+    <id column="prem_id" jdbcType="INTEGER" property="prem_id" />
+    <result column="prem_name" jdbcType="VARCHAR" property="prem_name" />
+    <result column="prem_path" jdbcType="VARCHAR" property="prem_path" />
+    <result column="prem_parent_id" jdbcType="INTEGER" property="prem_parent_id" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    prem_id, prem_name, prem_path, prem_parent_id
+  </sql>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from prem
+    where prem_id = #{prem_id,jdbcType=INTEGER}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from prem
+    where prem_id = #{prem_id,jdbcType=INTEGER}
+  </delete>
+
+  <insert id="insert" parameterType="com.creat.xjcrm.bean.Prem">
+    insert into prem (prem_id, prem_name, prem_path, 
+      prem_parent_id)
+    values (#{prem_id,jdbcType=INTEGER}, #{prem_name,jdbcType=VARCHAR}, #{prem_path,jdbcType=VARCHAR},
+      #{prem_parent_id,jdbcType=INTEGER})
+  </insert>
+
+  <insert id="insertSelective" parameterType="com.creat.xjcrm.bean.Prem">
+    insert into prem
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="prem_id != null">
+        prem_id,
+      </if>
+      <if test="prem_name != null">
+        prem_name,
+      </if>
+      <if test="prem_path != null">
+        prem_path,
+      </if>
+      <if test="prem_parent_id != null">
+        prem_parent_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="prem_id != null">
+        #{prem_id,jdbcType=INTEGER},
+      </if>
+      <if test="prem_name != null">
+        #{prem_name,jdbcType=VARCHAR},
+      </if>
+      <if test="prem_path != null">
+        #{prem_path,jdbcType=VARCHAR},
+      </if>
+      <if test="prem_parent_id != null">
+        #{prem_parent_id,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.creat.xjcrm.bean.Prem">
+    update prem
+    <set>
+      <if test="prem_name != null">
+        prem_name = #{prem_name,jdbcType=VARCHAR},
+      </if>
+      <if test="prem_path != null">
+        prem_path = #{prem_path,jdbcType=VARCHAR},
+      </if>
+      <if test="prem_parent_id != null">
+        prem_parent_id = #{prem_parent_id,jdbcType=INTEGER},
+      </if>
+    </set>
+    where prem_id = #{prem_id,jdbcType=INTEGER}
+  </update>
+
+  <update id="updateByPrimaryKey" parameterType="com.creat.xjcrm.bean.Prem">
+    update prem
+    set prem_name = #{prem_name,jdbcType=VARCHAR},
+      prem_path = #{prem_path,jdbcType=VARCHAR},
+      prem_parent_id = #{prem_parent_id,jdbcType=INTEGER}
+    where prem_id = #{prem_id,jdbcType=INTEGER}
+  </update>
+
+</mapper>

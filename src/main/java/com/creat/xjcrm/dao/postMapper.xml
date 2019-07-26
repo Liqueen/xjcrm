@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.creat.xjcrm.dao.postMapper">
+  <resultMap id="BaseResultMap" type="com.creat.xjcrm.bean.Post">
+    <id column="post_id" jdbcType="INTEGER" property="post_id" />
+    <result column="post_name" jdbcType="VARCHAR" property="post_name" />
+    <result column="depart_id" jdbcType="INTEGER" property="depart_id" />
+    <result column="depart_name" jdbcType="VARCHAR" property="depart_name" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    post_id, post_name, depart_id, depart_name, remark
+  </sql>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from post
+    where post_id = #{post_id,jdbcType=INTEGER}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from post
+    where post_id = #{post_id,jdbcType=INTEGER}
+  </delete>
+
+  <insert id="insert" parameterType="com.creat.xjcrm.bean.Post">
+    insert into post (post_id, post_name, depart_id, 
+      depart_name, remark)
+    values (#{post_id,jdbcType=INTEGER}, #{post_name,jdbcType=VARCHAR}, #{depart_id,jdbcType=INTEGER},
+      #{depart_name,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR})
+  </insert>
+
+  <insert id="insertSelective" parameterType="com.creat.xjcrm.bean.Post">
+    insert into post
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="post_id != null">
+        post_id,
+      </if>
+      <if test="post_name != null">
+        post_name,
+      </if>
+      <if test="depart_id != null">
+        depart_id,
+      </if>
+      <if test="depart_name != null">
+        depart_name,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="post_id != null">
+        #{post_id,jdbcType=INTEGER},
+      </if>
+      <if test="postName != null">
+        #{post_name,jdbcType=VARCHAR},
+      </if>
+      <if test="departId != null">
+        #{depart_id,jdbcType=INTEGER},
+      </if>
+      <if test="depart_name != null">
+        #{departName,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.creat.xjcrm.bean.Post">
+    update post
+    <set>
+      <if test="postName != null">
+        post_name = #{post_name,jdbcType=VARCHAR},
+      </if>
+      <if test="departId != null">
+        depart_id = #{depart_id,jdbcType=INTEGER},
+      </if>
+      <if test="depart_name != null">
+        depart_name = #{departName,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where post_id = #{post_id,jdbcType=INTEGER}
+  </update>
+
+  <update id="updateByPrimaryKey" parameterType="com.creat.xjcrm.bean.Post">
+    update post
+    set post_name = #{post_name,jdbcType=VARCHAR},
+      depart_id = #{depart_id,jdbcType=INTEGER},
+      depart_name = #{depart_name,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR}
+    where post_id = #{post_id,jdbcType=INTEGER}
+  </update>
+
+</mapper>

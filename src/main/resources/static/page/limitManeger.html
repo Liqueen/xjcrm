@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>权限管理</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous">
+</head>
+<body>
+
+<div class="container-fluid" style="height: auto">
+    <div id="top" style="width: 100%;height: 200px">
+        <div class="alert alert-success" role="alert" style="font-size: 14px">
+            <h6 class="alert-heading">角色和权限设置</h6>
+            <hr>
+            <h6>提示:</h6>
+            <p class="mb-0">1,角色代表操作权限和数据权限,操作权限是指据该角色的用户是否能有特定功能;
+                数据权限是指具有该角色的用户能操作的数据范围</p>
+            <p class="mb-0">2,超级管理员的权限是指系统默认的最大权限</p>
+        </div>
+        <div style="width: auto;height:20px ;">
+            <p style="margin-left: 20px"><i style="font-size: 20px;">公司角色 --></i><span>总经理设置</span></p>
+        </div>
+    </div>
+
+    <div id="botton" style="width: 100%;height: 800px">
+        <div id="top1" style="width: auto;height: 80px;" >
+                <p>
+                    <button type="button" class="btn btn-outline-info" onclick="optioin()">操作权限</button>
+                    <button type="button" class="btn btn-outline-info" onclick="date()">数据权限</button>
+                </p>
+        </div>
+        <div id="botton1" style="width: 100%;height: 800px" >
+
+
+        </div>
+    </div>
+
+</div>
+
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<script>
+    function optioin(){
+        $("#botton1").load("optionLimit.html");
+    }
+
+    function date(){
+        $("#botton1").load("dateLimit.html");
+    }
+</script>
+
+</body>
+</html>

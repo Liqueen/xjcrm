@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>项目管理</title>
+
+
+    <link rel="shortcut icon" href="http://placehold.it/64.png/000/fff">
+    <link rel="apple-touch-icon" sizes="144x144" href="http://placehold.it/144.png/000/fff">
+    <link rel="apple-touch-icon" sizes="114x114" href="http://placehold.it/114.png/000/fff">
+    <link rel="apple-touch-icon" sizes="72x72" href="http://placehold.it/72.png/000/fff">
+    <link rel="apple-touch-icon" sizes="57x57" href="http://placehold.it/57.png/000/fff">
+
+    <!-- Styles -->
+    <link href="../assets/css/lib/font-awesome.min.css" rel="stylesheet">
+    <link href="../assets/css/lib/themify-icons.css" rel="stylesheet">
+    <link href="../assets/css/lib/jsgrid/jsgrid-theme.min.css" rel="stylesheet" />
+    <link href="../assets/css/lib/jsgrid/jsgrid.min.css" type="text/css" rel="stylesheet" />
+    <link href="../assets/css/lib/menubar/sidebar.css" rel="stylesheet">
+    <link href="../assets/css/lib/bootstrap.min.css" rel="stylesheet">
+    <link href="../assets/css/lib/helper.css" rel="stylesheet">
+    <link href="../assets/css/style.css" rel="stylesheet">
+</head>
+
+<body>
+
+<div class="sidebar sidebar-hide-to-small sidebar-shrink sidebar-gestures">
+    <div class="nano">
+        <div class="nano-content">
+            <div class="logo"><a href="index.html"><span>管理界面</span></a></div>
+            <ul>
+                <li class="label">项目分类</li>
+                <li><a class="sidebar-sub-toggle"><i class="ti-bar-chart-alt"></i>  图书  <span class="sidebar-collapse-icon ti-angle-down"></span></a>
+                    <ul>
+                        <li><a href="javascript:void(0)" onclick="">小学</a></li>
+                        <li><a href="javascript:void(0)" onclick="">初中</a></li>
+                        <li><a href="javascript:void(0)" onclick="">高中</a></li>
+                        <li><a href="javascript:void(0)" onclick="">高职</a></li>
+                        <li><a href="javascript:void(0)" onclick="">本科</a></li>
+                    </ul>
+                </li>
+                <li><a class="sidebar-sub-toggle"><i class="ti-layout"></i> 试卷 <span class="sidebar-collapse-icon ti-angle-down"></span></a>
+                    <ul>
+                        <li><a href="javascript:void(0)" onclick="">小学</a></li>
+                        <li><a href="javascript:void(0)" onclick="">初中</a></li>
+                        <li><a href="javascript:void(0)" onclick="">高中</a></li>
+                        <li><a href="javascript:void(0)" onclick="">高职</a></li>
+                        <li><a href="javascript:void(0)" onclick="">本科</a></li>
+                    </ul>
+                </li>
+                <li><a class="sidebar-sub-toggle"><i class="ti-panel"></i> 高中学科竞赛 <span class="sidebar-collapse-icon ti-angle-down"></span></a>
+                    <ul>
+                        <li><a href="uc-calendar.html">数学</a></li>
+                        <li><a href="uc-carousel.html">物理</a></li>
+                        <li><a href="uc-weather.html">化学</a></li>
+                    </ul>
+                </li>
+
+                <li><a><i class="ti-close"></i> 艺考文化课</a></li>
+
+                <button type="button" class="btn btn-secondary btn-lg btn-block">
+                    <a href="addProject.html" style="color: white;font-size: 14px">增加项目</a></button>
+
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="header">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="float-left">
+                    <div class="hamburger sidebar-toggle">
+                        <span class="line"></span>
+                        <span class="line"></span>
+                        <span class="line"></span>
+                    </div>
+                </div>
+                <div class="float-right">
+                    <div class="dropdown dib">
+                        <div class="header-icon" data-toggle="dropdown">
+                            <i class="ti-bell"></i>
+
+                        </div>
+                    </div>
+                    <div class="dropdown dib">
+                        <div class="header-icon" data-toggle="dropdown">
+                            <i class="ti-email"></i>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="content-wrap">
+    <div class="main">
+        <div class="container-fluid">
+            <div id="main-content">
+                <div class="card">
+                    <div style="width: 100%;float: right">
+                        <div style="position: relative">
+                            <h6>产品列表</h6>
+                            <button type="button" class="btn btn-primary btn-sm">
+                                <a href="addProduct.html" style="color: white;font-size: 14px">+新增产品</a></button>
+                            <button type="button" class="btn btn-secondary btn-sm">
+                                <a href="#" style="color: white;font-size: 14px">+新增组合产品</a></button>
+
+                        </div>
+                        <hr>
+                        <div style="position: relative;width: 30%;float: left">
+                            <h6 style="margin-left: 20px;margin-top: 5px">已选0个产品</h6>
+                            <button type="button" class="btn btn-outline-info" style="margin-left: 150px;margin-top: -60px;font-size: 14px">批量操作</button>
+                        </div>
+                        <form class="form-inline">
+                            <div class="col-auto" style="margin-left: 400px">
+                                <input type="text" class="form-control mb-2" id="inlineFormInput" placeholder="请输入产品信息">
+                                <button type="submit" class="btn btn-primary mb-2" style="font-size: 14px">搜索</button>
+                            </div>
+                        </form>
+                        <table class="table">
+                            <thead class="thead-light">
+                            <tr>
+                                <th scope="col">
+                                    <div class="form-check">
+                                        <input class="form-check-input position-static" type="checkbox" id="blankCheckbox1" value="option1" aria-label="...">
+                                    </div>
+                                </th>
+                                <th scope="col">产品编号</th>
+                                <th scope="col">产品名称</th>
+                                <th scope="col">标准单价</th>
+                                <th scope="col">销售单位</th>
+                                <th scope="col">类别名称</th>
+                                <th scope="col">项目名称</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <th scope="col">
+                                    <div class="form-check">
+                                        <input class="form-check-input position-static" type="checkbox" id="blankCheckbox2" value="option1" aria-label="...">
+                                    </div>
+                                </th>
+                                <th scope="row">Tom</th>
+                                <td>男</td>
+                                <td>1234568</td>
+                                <td>经理</td>
+                                <td>无</td>
+                                <td>销售部</td>
+                            </tr>
+                            <tr>
+                                <th scope="col">
+                                    <div class="form-check">
+                                        <input class="form-check-input position-static" type="checkbox" id="blankCheckbox3" value="option1" aria-label="...">
+                                    </div>
+                                </th>
+                                <th scope="row">Tom</th>
+                                <td>男</td>
+                                <td>1234568</td>
+                                <td>经理</td>
+                                <td>无</td>
+                                <td>销售部</td>
+                            </tr>
+                            <tr>
+                                <th scope="col">
+                                    <div class="form-check">
+                                        <input class="form-check-input position-static" type="checkbox" id="blankCheckbox4" value="option1" aria-label="...">
+                                    </div>
+                                </th>
+                                <th scope="row">Tom</th>
+                                <td>男</td>
+                                <td>1234568</td>
+                                <td>经理</td>
+                                <td>无</td>
+                                <td>销售部</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="footer">
+                            <p>2018 © Admin Board.</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+    function departuser(){
+        $("#main-content .card").load(".html");
+    }
+
+</script>
+
+
+
+<!-- jquery vendor -->
+<script src="../assets/js/lib/jquery.min.js"></script>
+<script src="../assets/js/lib/jquery.nanoscroller.min.js"></script>
+<!-- nano scroller -->
+<script src="../assets/js/lib/menubar/sidebar.js"></script>
+<script src="../assets/js/lib/preloader/pace.min.js"></script>
+<!-- sidebar -->
+
+<!-- bootstrap -->
+
+
+
+<!-- JS Grid Scripts Start-->
+<script src="../assets/js/lib/jsgrid/db.js"></script>
+<script src="../assets/js/lib/jsgrid/jsgrid.core.js"></script>
+<script src="../assets/js/lib/jsgrid/jsgrid.load-indicator.js"></script>
+<script src="../assets/js/lib/jsgrid/jsgrid.load-strategies.js"></script>
+<script src="../assets/js/lib/jsgrid/jsgrid.sort-strategies.js"></script>
+<script src="../assets/js/lib/jsgrid/jsgrid.field.js"></script>
+<script src="../assets/js/lib/jsgrid/fields/jsgrid.field.text.js"></script>
+<script src="../assets/js/lib/jsgrid/fields/jsgrid.field.number.js"></script>
+<script src="../assets/js/lib/jsgrid/fields/jsgrid.field.select.js"></script>
+<script src="../assets/js/lib/jsgrid/fields/jsgrid.field.checkbox.js"></script>
+<script src="../assets/js/lib/jsgrid/fields/jsgrid.field.control.js"></script>
+<script src="../assets/js/lib/jsgrid/jsgrid-init.js"></script>
+<!-- JS Grid Scripts End-->
+
+<script src="../assets/js/lib/bootstrap.min.js"></script><script src="../assets/js/scripts.js"></script>
+<!-- scripit init-->
+
+
+</body>
+
+</html>

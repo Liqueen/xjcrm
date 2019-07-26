@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>部门和员工</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous">
+</head>
+<body>
+
+<div>
+    <div class="alert alert-dark" role="alert">
+        <h6>部门和员工设置</h6>
+    </div>
+    <div id="depatApp" style="width: 23%;float: left">
+        <h6>公司组织架构</h6>
+        <ul class="list-group" v-for="depart in departary">
+            <li class="list-group-item">
+                <a href="javascript:void(0)" onclick="findEmp()">{{depart.depart_name}}</a>
+            </li>
+        </ul>
+    </div>
+    <div style="width: 76%;float: right">
+        <div style="position: relative">
+            <h6>用户列表</h6>
+        </div>
+        <hr>
+        <div style="position: relative;width: 30%;float: left">
+            <h6 style="margin-left: 20px;margin-top: 5px">已选0位客户</h6>
+            <button type="button" class="btn btn-outline-info" style="margin-left: 150px;margin-top: -60px;font-size: 14px">批量操作</button>
+        </div>
+        <form class="form-inline">
+            <div class="col-auto" style="margin-left: 260px">
+                <input type="text" class="form-control mb-2" id="inlineFormInput" placeholder="请输入用户信息">
+                <button type="submit" class="btn btn-primary mb-2" style="font-size: 14px">搜索</button>
+            </div>
+        </form>
+        <div id="empApp">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">员工编号</th>
+                    <th scope="col">员工姓名</th>
+                    <th scope="col">所在部门</th>
+                    <th scope="col">所处职位</th>
+                    <th scope="col">联系电话</th>
+                    <th scope="col">状态</th>
+                    <th scope="col">角色</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr v-for="emp in empary">
+                    <th scope="row">{{emp.emp_id}}</th>
+                    <td>{{emp.emp_name}}</td>
+                    <td>{{emp.depart.depart_name}}</td>
+                    <td>{{emp.post.post_name}}</td>
+                    <td>{{emp.emp_tel}}</td>
+                    <td>{{emp.state}}</td>
+                    <td>{{emp.role.role_name}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+
+    $(function () {
+        var departVue = new Vue({
+            el : "#depatApp",
+            data : {
+                departary : []
+            },
+            created : function () {
+                var _self = this;
+                $.post("/myweb/depart/querydepart.do",function (data) {
+                    _self.departary = data;
+                });
+            }
+        })
+
+        var emp = new Vue({
+            el : "#empApp",
+            data : {
+                empary : []
+            },
+            created : function () {
+                var _self = this;
+                $.post("/myweb/employee/getAllEmp.do",function (data) {
+                    _self.empary = data;
+                },"json");
+            }
+        });
+    })
+
+    function findEmp() {
+        var emp = new Vue({
+            el : "#empApp",
+            data : {
+                empary : []
+            },
+            created : function () {
+                var _self = this;
+                $.post("/myweb/employee/getEmpByDepartName.do",function (data) {
+                    _self.empary = data;
+                },"json");
+            }
+        });
+    }
+
+</script>
+
+</body>
+</html>

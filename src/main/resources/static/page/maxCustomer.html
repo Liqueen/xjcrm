@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>最大客户</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="../myplugs/css/checkbox.css">
+</head>
+<body>
+<div class="container-fluid" style="height: auto">
+    <div style="overflow: hidden; margin: 20px auto;">
+        <span class="parentChk spcheckboxCheck">
+            <input value="5" checked="checked" name="sysfunids" class="subchk" type="checkbox">&nbsp;&nbsp;&nbsp;
+            <label class="labelfor">限制每个员工拥有的最大客户数</label>
+        </span>
+    </div>
+    <div class="form-check">
+        <input class="form-check-input" type="radio" id="disabledFieldsetCheck">
+        <label class="form-check-label" for="disabledFieldsetCheck">
+            此规则只限制'未成交'客户
+        </label>
+    </div>
+    <div class="form-check">
+        <input class="form-check-input" type="radio" id="disabledFieldsetCheck1">
+        <label class="form-check-label" for="disabledFieldsetCheck">
+            按员工设置不同的客户数上限
+        </label>
+    </div>
+<br>
+    <div style="width: auto;height: auto">
+        <table class="table">
+            <tr>
+                <th scope="row">每个员工拥有的最大客户数为
+                    <span style="border: 1px solid grey;width: 50px;height: 10px">20</span>个</th>
+                <td>此规则针对所有员工</td>
+            </tr>
+            <tr>
+                <th scope="row">每个员工拥有的最大客户数为
+                    <span style="border: 1px solid grey;width: 50px;height: 10px">20</span>个</th>
+                <td>此规则针对所有员工</td>
+            </tr>
+            <tr>
+                <th scope="row">每个员工拥有的最大客户数为
+                    <span style="border: 1px solid grey;width: 50px;height: 10px">20</span>个</th>
+                <td>此规则针对所有员工</td>
+            </tr>
+        </table>
+        <button type="button" class="btn btn-outline-secondary" style="float: left;margin-right: 20px;">
+            <a href="addPro.html">新增特殊员工</a>
+        </button>
+        <br><br>
+        <p style="color: grey;font-size: 14px"><span style="color: #0d71bb">*</span>当员工拥有客户数超过规定上限时,新增客户无法成功</p>
+        <p style="color: grey;font-size: 14px"><span style="color: #0d71bb">*</span>如果在设置最大客户数前,员工所拥有客户数已超过上限,则原有客户不会影响,但是该员工无法在继续添加新客户</p>
+    </div>
+
+</div>
+
+
+
+
+
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<script type="text/javascript">
+    $(function() {
+        $(".parentChk")
+            .click(function() {
+                if(!$(this).hasClass("spcheckbox")) { //如果取消
+                    $(this).next().find(".subchk").removeAttr("checked");
+                    $(this).removeClass("spcheckboxCheck");
+                    $(this).addClass("spcheckbox");
+                    $(this).children(0).removeAttr("checked");
+                } else {
+                    $(this).next().find(".subchk").attr("checked",
+                        "checked");
+                    $(this).removeClass("spcheckbox");
+                    $(this).addClass("spcheckboxCheck");
+                    $(this).children(0).attr("checked", "checked");
+                }
+            });
+    });
+</script>
+</body>
+</html>

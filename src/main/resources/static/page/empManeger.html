@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>员工管理</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous">
+</head>
+<body>
+
+<div class="container-fluid">
+    <h6>员工列表</h6>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+        + 新增员工
+    </button>
+
+    <!-- 增加部门弹出框 -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">部门增加</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form>
+                    <div class="modal-body">
+                        <div class="container-fluid">
+                            <!--<div class="form-group row">
+                                <label for="input1" class="col-sm-2 col-form-label">员工编号</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="input1" placeholder="员工编号">
+                                    <span style="color: red;">*为必填项</span>
+                                </div>
+                            </div>-->
+                            <div class="form-group row">
+                                <label for="input2" class="col-sm-2 col-form-label">员工姓名</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="input2" placeholder="员工姓名">
+                                    <span style="color: red;">*为必填项</span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="input3" class="col-sm-2 col-form-label">部门编号</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="input3" placeholder="部门编号">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="input4" class="col-sm-2 col-form-label">职位编号</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="input4" placeholder="职位编号">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="input5" class="col-sm-2 col-form-label">联系方式</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="input5" placeholder="联系方式">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="input7" class="col-sm-2 col-form-label">上级员工编号</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="input7" placeholder="上级员工编号">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="input8" class="col-sm-2 col-form-label">角色编号</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="input8" placeholder="角色编号">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="addEmp()">保存</button>
+                            <button type="button" class="btn btn-primary"><a href="index.html" style="text-decoration: none;color: aliceblue">返回</a></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <hr>
+    <div id="empApp">
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">员工编号</th>
+                <th scope="col">员工姓名</th>
+                <th scope="col">所在部门</th>
+                <th scope="col">所处职位</th>
+                <th scope="col">联系电话</th>
+                <th scope="col">状态</th>
+                <th scope="col">角色</th>
+                <th scope="col">操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr v-for="emp in empary">
+                <th scope="row">{{emp.emp_id}}</th>
+                <td>{{emp.emp_name}}</td>
+                <td>{{emp.depart.depart_name}}</td>
+                <td>{{emp.post.post_name}}</td>
+                <td>{{emp.emp_tel}}</td>
+                <td>{{emp.state}}</td>
+                <td>{{emp.role.role_name}}</td>
+                <td>
+                    <button type="button" class="btn btn-light">修改</button>
+                    <button type="button" class="btn btn-light">删除</button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+
+    var emp = new Vue({
+        el : "#empApp",
+        data : {
+            empary : []
+        },
+        created : function () {
+            var _self = this;
+            $.post("/myweb/employee/getAllEmp.do",function (data) {
+                _self.empary = data;
+            },"json");
+        }
+    });
+
+
+    function addEmp(){
+        // var empId = $("#input1").val();
+        var eName = $("#input2").val();
+        var deptId = $("#input3").val();
+        var postId = $("#input4").val();
+        var empTel = $("#input5").val();
+        // var state = $("#input6").val();
+        var emParId = $("#input7").val();
+        var roleId = $("#input8").val();
+
+        $.post("/myweb/employee/addEmp.do",{
+            // "emp_id" : empId,
+            "emp_name" : eName,
+            "depart_id" :deptId ,
+            "post_id" : postId,
+            "emp_tel" : empTel,
+            // "state" :state ,
+            "emp_parent_id" : emParId,
+            "role_id" : roleId,
+        },function (data) {
+            alert(data);
+        },"json");
+    }
+
+
+</script>
+
+</body>
+</html>

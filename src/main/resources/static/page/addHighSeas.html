@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>增加公海</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="../myplugs/css/checkbox.css">
+
+</head>
+<body>
+
+<div class="container-fluid">
+    <div class="alert alert-info" role="alert">
+        <h3>新增公海</h3>
+    </div>
+    <form>
+        <div class="form-group row">
+            <label for="input1" class="col-sm-2 col-form-label">公海名称</label>
+            <div class="col-sm-10">
+                <input type="email" class="form-control" id="input1" placeholder="公海名称">
+                <span style="color: red;">*为必填项</span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="input2" class="col-sm-2 col-form-label">公海管理员</label>
+            <div class="col-sm-10">
+                <input type="password" class="form-control" id="input2" placeholder="公海管理员">
+                <p style="color: grey;font-size: 14px"><span style="color: #0d71bb">*</span>
+                    公海管理员可对客户进行编辑、移除、删除、导出等操作</p>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="input3" class="col-sm-2 col-form-label">公海成员</label>
+            <div class="col-sm-10">
+                <input type="password" class="form-control" id="input3" placeholder="公海成员">
+                <span style="color: red;">*为必填项</span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="gridRadios1" class="col-sm-2 col-form-label">自动划入规则</label>
+            <div class="col-sm-10">
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
+                    <label class="form-check-label" for="gridRadios1">
+                        超过N天'未跟进'的客户,由系统定时划入公海
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
+                    <label class="form-check-label" for="gridRadios2">
+                        超过N天'未成交'的客户,由系统定时划入公海
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="option2">
+                    <label class="form-check-label" for="gridRadios2">
+                        不自动划入
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="input2" class="col-sm-2 col-form-label">抢回限制</label>
+            <div style="overflow: hidden;">
+                <span class="parentChk spcheckboxCheck">
+                    <input value="5" checked="checked" name="sysfunids" class="subchk" type="checkbox">&nbsp;&nbsp;&nbsp;
+                    <label class="labelfor" style="width: 400px"><b style="border: 1px solid black;width: 50px;height: 10px">10</b>
+                        天内不能连续"抢"同一个客户
+                    </label>
+                </span>
+                <p style="color: grey;font-size: 14px"><span style="color: #0d71bb">*</span>
+                    客户被移除或者系统定时划入公海后,前负责人在N天内不能抢回</p>
+            </div>
+
+        </div>
+
+        <div class="form-group row">
+            <div class="col-sm-10">
+                <button type="submit" class="btn btn-primary">保存</button>&nbsp;&nbsp;&nbsp;
+                <button type="button" class="btn btn-primary">
+                    <a href="index.html" style="text-decoration: none;color: aliceblue">返回</a>
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+
+
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<script type="text/javascript">
+    $(function() {
+        $(".parentChk")
+            .click(function() {
+                if(!$(this).hasClass("spcheckbox")) { //如果取消
+                    $(this).next().find(".subchk").removeAttr("checked");
+                    $(this).removeClass("spcheckboxCheck");
+                    $(this).addClass("spcheckbox");
+                    $(this).children(0).removeAttr("checked");
+                } else {
+                    $(this).next().find(".subchk").attr("checked",
+                        "checked");
+                    $(this).removeClass("spcheckbox");
+                    $(this).addClass("spcheckboxCheck");
+                    $(this).children(0).attr("checked", "checked");
+                }
+            });
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>业绩目标</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous">
+</head>
+<body>
+
+<div class="container-fluid" style="height: auto">
+        <div class="alert alert-success" role="alert" style="font-size: 14px">
+            <h6 class="alert-heading">业绩目标列表</h6>
+            <hr>
+            <h6>提示:</h6>
+            <p class="mb-0">1,产品销售,产品销售额,产品分类销售,产品分类销售额根据合同的关联产品来统计</p>
+            <p class="mb-0">2,如果开启了合同和回款审批,则只统计通过了审批的合同和回款</p>
+        </div>
+     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+       <a style="color: white" href="javascript:void(0)" onclick="addPer()">+ 新增业绩目标</a>
+    </button>
+
+    <!-- 增加业绩目标弹出框 -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">部门业绩</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form>
+                    <div class="form-group">
+                        <label style="margin-left: 50px" for="exampleFormControlSelect1">业绩年度</label>
+                        <select style="width: 80%;margin: auto" class="form-control " id="exampleFormControlSelect1">
+
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label style="margin-left: 50px" for="exampleFormControlSelect1">业绩类型</label>
+                        <select style="width: 80%;margin: auto" class="form-control" id="exampleFormControlSelect2">
+
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label style="margin-left: 50px" for="exampleFormControlSelect1">业绩目标</label>
+                        <div class="col-sm-10">
+                            <input type="text" style="margin-left: 50px" class="form-control" id="input3" placeholder="业绩目标">
+                        </div>
+                    </div>
+
+
+                    <div class="form-group row">
+                        <div class="col-sm-10" style="margin: auto;">
+                            <button type="button" class="btn btn-primary" onclick="addPerformance()">保存</button>&nbsp;&nbsp;&nbsp;
+                            <button type="button" class="btn btn-primary">
+                                <a href="index.html" style="text-decoration: none;color: aliceblue">返回</a>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="perApp">
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">编号</th>
+                <th scope="col">年度</th>
+                <th scope="col">业绩类型</th>
+                <th scope="col">业绩目标</th>
+                <th scope="col">操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr v-for="per in perary">
+                <th scope="row">{{per.id}}</th>
+                <td>{{per.perYear.per_year}}</td>
+                <td>{{per.perType.per_type}}</td>
+                <td>{{per.per_targer}}</td>
+                <td>
+                    <button type="button" class="btn btn-light">修改</button>
+                    <button type="button" class="btn btn-light">删除</button>
+                </td>
+            </tr>
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+
+    $(function () {
+        var perVue = new Vue({
+            el : "#perApp",
+            data : {
+                perary : []
+            },
+            created : function () {
+                var _self = this;
+                $.post("/myweb/operation/getAllPer.do",function (data) {
+                    _self.perary = data;
+                },"json");
+            }
+        })
+    })
+
+    function addPer(){
+        //查询年份
+        $.post("/myweb/operation/getPerYear.do",function (data) {
+            var str = "";
+            for (var i = 0; i <data.length ; i++) {
+                str += "<option value='"+data[i].id+"'>" +data[i].per_year+ "</option>";
+            }
+            $("#exampleFormControlSelect1").html(str);
+        });
+
+        //查询类别
+        $.post("/myweb/operation/getPerType.do",function (data) {
+            var str = "";
+            for (var i = 0; i <data.length ; i++) {
+                str += "<option value='"+data[i].id+"'>" +data[i].per_type+ "</option>";
+            }
+            $("#exampleFormControlSelect2").html(str);
+        });
+    }
+
+    function addPerformance() {
+        var perYear = $("#exampleFormControlSelect1").val();
+        var perType = $("#exampleFormControlSelect2").val();
+        var perTarget = $("#input3").val();
+        $.post("/myweb/operation/addPerforman.do",{
+
+        },function (data) {
+            alert(data);
+        });
+
+    }
+
+
+
+</script>
+
+</body>
+</html>

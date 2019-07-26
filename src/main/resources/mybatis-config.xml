@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+    <mappers>
+        <mapper resource="com/creat/xjcrm/dao/departMapper.xml"></mapper>
+        <mapper resource="com/creat/xjcrm/dao/employeeMapper.xml"></mapper>
+        <mapper resource="com/creat/xjcrm/dao/RoleMapper.xml"></mapper>
+        <mapper resource="com/creat/xjcrm/dao/CustomerMapper.xml"></mapper>
+        <mapper resource="com/creat/xjcrm/dao/CusTypeMapper.xml"></mapper>
+        <mapper resource="com/creat/xjcrm/dao/OperationMapper.xml"></mapper>
+    </mappers>
+
+</configuration>

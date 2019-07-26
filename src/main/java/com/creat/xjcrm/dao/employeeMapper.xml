@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.creat.xjcrm.dao.employeeMapper">
+
+  <resultMap id="empMap" type="com.creat.xjcrm.bean.Employee">
+    <id column="emp_id"  property="emp_id" />
+    <result column="emp_name"  property="emp_name" />
+    <result column="emp_tel"  property="emp_tel" />
+    <association property="role" javaType="com.creat.xjcrm.bean.Role">
+      <id column="role_id" property="role_id"></id>
+      <result column="role_name" property="role_name"></result>
+    </association>
+  </resultMap>
+
+  <resultMap id="empMap2" type="com.creat.xjcrm.bean.Employee">
+    <id column="emp_id"  property="emp_id" />
+    <result column="emp_name"  property="emp_name" />
+    <result column="emp_tel"  property="emp_tel" />
+    <result column="state" property="state"/>
+    <result column="emp_parent_id" property="emp_parent_id"></result>
+    <association property="depart" javaType="com.creat.xjcrm.bean.Depart">
+      <id column="depart_id" property="depart_id"></id>
+      <result column="depart_name" property="depart_name"></result>
+    </association>
+    <association property="post" javaType="com.creat.xjcrm.bean.Post">
+      <id column="post_id" property="post_id"></id>
+      <result column="post_name" property="post_name"></result>
+    </association>
+    <association property="role" javaType="com.creat.xjcrm.bean.Role">
+      <id column="role_id" property="role_id"></id>
+      <result column="role_name" property="role_name"></result>
+    </association>
+  </resultMap>
+
+  <!--用户登录-->
+  <select id="loginSys" resultMap="empMap" parameterType="com.creat.xjcrm.bean.Employee">
+      select e.emp_name,e.emp_tel,r.role_id,r.role_name from employee e, role r
+        where e.emp_name = #{emp_name}
+          and e.emp_tel = #{emp_tel}
+          and e.role_id = r.role_id
+  </select>
+
+  <select id="getAllRmp" resultMap="empMap2" resultType="list">
+      select e.emp_id,e.emp_name,e.state,e.emp_tel,d.depart_name,p.post_name,r.role_name
+      from employee e,depart d,post p,role r
+      where e.depart_id = d.depart_id
+      and e.post_id = p.post_id
+      and e.role_id = r.role_id
+  </select>
+
+  <!--根据部门名称查询员工-->
+  <select id="getEmpByDepartName" resultMap="empMap2" resultType="list">
+      select e.emp_id,e.emp_name,e.emp_tel,d.depart_name,p.post_name,r.role_name,e.state
+      from employee e,depart d,post p,role r
+      where e.depart_id = d.depart_id
+      and e.post_id = p.post_id
+      and e.role_id = r.role_id
+      and d.depart_name = #{depart_name}
+  </select>
+
+  <insert id="addEmp" parameterType="com.creat.xjcrm.bean.Employee">
+        insert into employee (emp_name,depart_id,post_id,emp_tel,state,emp_parent_id,role_id)
+        values (#{emp_name},#{depart.depart_id},#{post.post_id},#{emp_tel},#{state},#{emp_parent_id},#{role.role_id})
+  </insert>
+
+  <insert id="addMsg" parameterType="com.creat.xjcrm.bean.Message">
+    insert into message (user_id,title,content,create_time,state,type)
+        values (1,#{title},#{content},now(),#{state},#{type})
+  </insert>
+
+  <resultMap id="msgMap" type="com.creat.xjcrm.bean.Message">
+    <id column="id" property="id"></id>
+    <result column="user_id" property="user_id"></result>
+    <result column="title" property="title"></result>
+    <result column="content" property="content"></result>
+    <result column="create_time" property="create_time"></result>
+    <result column="state" property="state"></result>
+    <result column="type" property="type"></result>
+  </resultMap>
+
+  <select id="getNewMsg" resultMap="msgMap" resultType="list">
+    select * from message order by create_time desc limit 3
+  </select>
+  <select id="getAllMsg" resultMap="msgMap" resultType="list">
+    select * from message order by create_time desc
+  </select>
+
+</mapper>
